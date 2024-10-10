@@ -24,26 +24,26 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-3. Verify Docker Installation
+### 3. Verify Docker Installation
 Ensure that Docker is correctly installed:
 ```bash
 docker --version
 ```
 
-📥 Steps to Run the Zenchain Node
-1. Pull the Zenchain Docker Image
+## 📥 Steps to Run the Zenchain Node
+### 1. Pull the Zenchain Docker Image
 First, pull the latest Zenchain image from GitHub's Container Registry:
 ```
 docker pull ghcr.io/zenchain-protocol/zenchain-testnet:latest
 ```
 
-2. Create a Directory for Chain Data
+### 2. Create a Directory for Chain Data
 Create a directory on your VPS to store the node's data:
 ```bash
 mkdir -p ~/zenchain-data
 ```
 
-3. Run the Zenchain Node in Production Mode
+### 3. Run the Zenchain Node in Production Mode
 Now, run the Zenchain node in detached mode (background). This will start the node and persist its data in the ~/zenchain-data directory:
 ```
 docker run -d \
@@ -59,20 +59,23 @@ docker run -d \
   --bootnodes="/dns4/node-7242611732906999808-0.p2p.onfinality.io/tcp/26266/p2p/12D3KooWLAH3GejHmmchsvJpwDYkvacrBeAQbJrip5oZSymx5yrE" \
   --chain=zenchain_testnet
 ```
-Explanation of the Command:
--d: Run in detached mode (background).
---name zenchain: Name the container zenchain.
--p 9944:9944: Expose port 9944 for RPC calls.
--v ~/zenchain-data:/chain-data: Mount local directory ~/zenchain-data for data persistence.
---base-path=/chain-data: Set the node data directory.
---rpc-cors=all: Enable CORS for RPC to allow external access.
---validator: Run as a validator node.
---name="MyZenchainNode": Assign a name to the node.
---bootnodes: Specify the bootnode for network discovery.
---chain=zenchain_testnet: Use the Zenchain testnet configuration.
-```
 
-4. Monitor Node Logs
+### Docker Command Explanation:
+
+- `-d`: Runs the container in detached mode (background).
+- `--name zenchain`: Names the container `zenchain`.
+- `-p 9944:9944`: Maps port 9944 between host and container.
+- `-v ~/zenchain-data:/chain-data`: Persists node data on the host.
+- `--base-path=/chain-data`: Sets the data storage path inside the container.
+- `--rpc-cors=all`: Enables CORS for RPC.
+- `--validator`: Runs the node as a validator.
+- `--name="Mynode"`: Names the node `mynode`.
+- `--bootnodes`: Specifies the bootnode for network discovery.
+- `--chain=zenchain_testnet`: Uses the Zenchain testnet.
+
+
+
+### 4. Monitor Node Logs
 To view the logs of the running Zenchain node, use:
 ```
 docker logs -f zenchain
