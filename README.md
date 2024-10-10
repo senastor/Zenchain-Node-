@@ -15,38 +15,37 @@ sudo apt update
 sudo apt install -y docker.io
 sudo systemctl start docker
 sudo systemctl enable docker
+```
 
-2. (Optional) Allow Docker to run as a non-root user
+### 2. (Optional) Allow Docker to run as a non-root user
 This allows you to run Docker commands without sudo.
-
-bash
-Salin kode
+```bash
 sudo usermod -aG docker $USER
 newgrp docker
+```
+
 3. Verify Docker Installation
 Ensure that Docker is correctly installed:
-
-bash
-Salin kode
+```bash
 docker --version
+```
+
 📥 Steps to Run the Zenchain Node
 1. Pull the Zenchain Docker Image
 First, pull the latest Zenchain image from GitHub's Container Registry:
-
-bash
-Salin kode
+```
 docker pull ghcr.io/zenchain-protocol/zenchain-testnet:latest
+```
+
 2. Create a Directory for Chain Data
 Create a directory on your VPS to store the node's data:
-
-bash
-Salin kode
+```bash
 mkdir -p ~/zenchain-data
+```
+
 3. Run the Zenchain Node in Production Mode
 Now, run the Zenchain node in detached mode (background). This will start the node and persist its data in the ~/zenchain-data directory:
-
-bash
-Salin kode
+```
 docker run -d \
   --name zenchain \
   -p 9944:9944 \
@@ -70,11 +69,31 @@ Explanation of the Command:
 --name="MyZenchainNode": Assign a name to the node.
 --bootnodes: Specify the bootnode for network discovery.
 --chain=zenchain_testnet: Use the Zenchain testnet configuration.
+```
+
 4. Monitor Node Logs
 To view the logs of the running Zenchain node, use:
-
-bash
-Salin kode
+```
 docker logs -f zenchain
+```
 This will stream the logs in real time so you can monitor the syncing process and node status.
+
+
+## References
+
+- **[Zenquest](https://zenquest.zenchain.io?referral=tGaa_g1b0yk_O-J_e3hCaEUOpEe2rPN2tBlOWkXOvgA)**  
+  You can participate in various Zenchain quests, earn rewards, and gain valuable incentives. This is an excellent starting point to become familiar with Zenchain’s ecosystem.
+
+- **[Zenchain Faucet](https://faucet.zenchain.io/)**  
+  The Zenchain Faucet provides testnet tokens to help you get started. 
+
+## Useful Tools and Resources
+
+- **[Zenchain Official Documentation](https://zenchain.io/docs)**  
+  The official Zenchain documentation provides all the necessary details to understand, set up, and manage your Zenchain node.
+- **[Zenchain GitHub Repository](https://github.com/zenchain-protocol)**  
+
+
+
+
 
